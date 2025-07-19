@@ -59,6 +59,14 @@
                         <span>Complain Box</span>
                     </a>
                 </li>
+
+                <!-- faqs -->
+                <li class="nav-item">
+                    <a href="{{ route('faqs.index') }}" class="nav-link d-flex align-items-center gap-3 {{ request()->is('faqs.index*') ? 'active bg-primary text-white' : 'text-white' }}">
+                        <i class="bi bi-chat-left-dots-fill fs-5"></i>
+                        <span>Faqs</span>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>

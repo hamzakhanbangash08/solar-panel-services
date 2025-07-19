@@ -98,5 +98,6 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-    //
+    //faqcontroller
+    Route::resource('faqs', App\Http\Controllers\Admin\FaqController::class);
 });

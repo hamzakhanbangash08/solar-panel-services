@@ -146,68 +146,24 @@
     <h4 class="text-center mb-4">Frequently Asked Questions</h4>
     <div class="row justify-content-center">
         <div class="col-md-10">
-            <div class="accordion" id="faqAccordion">
-
-                {{-- Question 1 --}}
-                <div class="accordion-item mb-2">
-                    <h2 class="accordion-header" id="q1">
-                        <button class="accordion-button collapsed d-flex align-items-center gap-2" data-bs-toggle="collapse" data-bs-target="#a1">
-                            <i class="bi bi-cash-coin fs-5 text-primary"></i>
-                            What is the cost of solar panel installation?
+            <div class="accordion mt-5 mx-auto" id="faqAccordion">
+                @foreach($faqs as $index => $faq)
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading{{ $index }}">
+                        <button class="accordion-button {{ $index != 0 ? 'collapsed' : '' }}" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#collapse{{ $index }}" aria-expanded="{{ $index == 0 ? 'true' : 'false' }}"
+                            aria-controls="collapse{{ $index }}">
+                            <i class="bi bi-question-circle me-2 text-primary"></i> {{ $faq->question }}
                         </button>
                     </h2>
-                    <div id="a1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div id="collapse{{ $index }}" class="accordion-collapse collapse {{ $index == 0 ? 'show' : '' }}"
+                        data-bs-parent="#faqAccordion">
                         <div class="accordion-body">
-                            Costs depend on system size and energy needs. We offer free custom quotes.
+                            {{ $faq->answer }}
                         </div>
                     </div>
                 </div>
-
-                {{-- Question 2 --}}
-                <div class="accordion-item mb-2">
-                    <h2 class="accordion-header" id="q2">
-                        <button class="accordion-button collapsed d-flex align-items-center gap-2" data-bs-toggle="collapse" data-bs-target="#a2">
-                            <i class="bi bi-clock-history fs-5 text-success"></i>
-                            How long does installation take?
-                        </button>
-                    </h2>
-                    <div id="a2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                        <div class="accordion-body">
-                            Most installations are completed within 2–5 days based on complexity.
-                        </div>
-                    </div>
-                </div>
-
-                {{-- Question 3 --}}
-                <div class="accordion-item mb-2">
-                    <h2 class="accordion-header" id="q3">
-                        <button class="accordion-button collapsed d-flex align-items-center gap-2" data-bs-toggle="collapse" data-bs-target="#a3">
-                            <i class="bi bi-shield-check fs-5 text-warning"></i>
-                            Is there any warranty for the panels?
-                        </button>
-                    </h2>
-                    <div id="a3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                        <div class="accordion-body">
-                            Yes, our solar panels include up to 25 years of performance warranty.
-                        </div>
-                    </div>
-                </div>
-
-                {{-- Question 4 --}}
-                <div class="accordion-item mb-2">
-                    <h2 class="accordion-header" id="q4">
-                        <button class="accordion-button collapsed d-flex align-items-center gap-2" data-bs-toggle="collapse" data-bs-target="#a4">
-                            <i class="bi bi-lightning-charge-fill fs-5 text-danger"></i>
-                            Will I still receive an electricity bill?
-                        </button>
-                    </h2>
-                    <div id="a4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                        <div class="accordion-body">
-                            You may receive a small bill depending on energy usage, but it will be greatly reduced.
-                        </div>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
         </div>
     </div>
