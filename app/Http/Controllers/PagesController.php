@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Faqs;
 use App\Models\Team;
 use App\Models\Panel;
 use Illuminate\Http\Request;
@@ -22,8 +23,8 @@ class PagesController extends Controller
     function servicepage()
     {
         $services = Panel::all();
-
-        return view('pages.services', compact('services'));
+        $faqs = Faqs::all();
+        return view('pages.services', compact('services', 'faqs'));
     }
 
     function aboutpage()
