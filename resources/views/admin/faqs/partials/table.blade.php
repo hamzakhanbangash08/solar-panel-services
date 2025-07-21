@@ -15,13 +15,13 @@
             <td>{{ Str::limit($faq->answer, 100) }}</td>
             <td>
                 <a href="{{ route('faqs.edit', $faq->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                <form action="{{ route('faqs.destroy', $faq->id) }}" method="POST" style="display:inline;">
+                <form id="delete-form-{{ $faq->id }}" action="{{ route('faqs.destroy', $faq->id) }}" method="POST" style="display: none;">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Faq?');">
-                        Delete
-                    </button>
                 </form>
+
+                <button onclick="confirmDelete({{ $faq->id }})" class="btn btn-danger">Delete</button>
+
             </td>
         </tr>
         @empty
@@ -31,6 +31,25 @@
         @endforelse
     </tbody>
 </table>
+
+
+<script>
+    function confirmDelete(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This action cannot be undone!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delete-form-' + id).submit();
+            }
+        });
+    }
+</script>
 
 <!-- <div class="d-flex justify-content-center">
     {{ $faqs->links() }}

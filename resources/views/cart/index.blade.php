@@ -58,7 +58,7 @@
                         <th>
                             <form action="{{ route('checkout.page') }}" method="POST">
                                 @csrf
-                                <button class="btn addtocart">Proceed to Checkout</button>
+                                <button class="border-0 rounded p-2 addtocart">Proceed to Checkout</button>
                             </form>
                         </th>
                         <th colspan="3" class="text-end">Grand Total:</th>

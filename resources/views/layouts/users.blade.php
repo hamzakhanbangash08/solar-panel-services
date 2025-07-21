@@ -138,6 +138,32 @@
             cursor: pointer;
             box-shadow: 0 0 0 2px #f38734;
         }
+
+
+        /* footer */
+
+        .app-footer {
+            background-color: #f8f9fa;
+            font-size: 0.9rem;
+            color: #6c757d;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .app-footer strong {
+            color: #ffa500;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .app-footer {
+                background-color: #1e1e1e;
+                color: #ccc;
+                border-top-color: #333;
+            }
+
+            .app-footer strong {
+                color: #ffb84d;
+            }
+        }
     </style>
     @yield('styles')
 </head>
@@ -272,43 +298,50 @@
         <main class="">
             <div class="container-fluid m-0 p-0">
                 @yield('pageTitle')
-                <script>
-                    const notyf = new Notyf({
-                        duration: 3000,
-                        position: {
-                            x: 'right',
-                            y: 'top'
-                        },
-                        dismissible: true,
-                    });
-
-                    @if(session('success'))
-                    notyf.success("{{ addslashes(session('success')) }}");
-                    @endif
-
-                    @if(session('error'))
-                    notyf.error("{{ addslashes(session('error')) }}");
-                    @endif
-                </script>
-
-
                 @yield('content')
             </div>
         </main>
 
         <!--begin::Footer-->
-        <footer class="app-footer my-3">
-            <div class="float-end d-none d-sm-inline">Ecommerce Website for Solar panel Services</div>
-            <strong>
-                Copyright &copy; 2025
-            </strong>
-            All rights reserved.
+        <footer class="app-footer py-3 px-4 mt-5 border-top d-flex flex-column flex-sm-row justify-content-between align-items-center text-muted">
+            <div class="footer-left mb-2 mb-sm-0">
+                <strong>Copyright &copy; <span class="me-2" id="currentYear"></span></strong>@lang('All rights reserved.')
+
+            </div>
+            <div class="footer-right small">
+                @lang('Ecommerce Website for Solar Panel Services')
+            </div>
         </footer>
+
+
+
         <!--end::Footer-->
 
     </div>
 
     @yield('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if(session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: '{{ session('
+            success ') }}',
+            timer: 3000,
+            showConfirmButton: false
+        });
+    </script>
+    @endif
+
+    <script>
+        $(document).ready(function() {
+            $('#currentYear').text(new Date().getFullYear());
+        });
+    </script>
+
     <!--end::Scripts-->
 </body>
 

@@ -112,7 +112,9 @@
                     <input type="text" name="location" class="form-control" placeholder="Installation location" required>
                 </div>
 
-                <div class="mb-3">
+
+
+                <div class=" mb-3">
                     <label class="form-label">Company Name</label>
                     <input type="text" name="company" class="form-control" placeholder="Company that built the panel" required>
                 </div>

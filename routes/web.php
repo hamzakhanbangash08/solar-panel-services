@@ -2,9 +2,8 @@
 
 
 
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\PagesController;
 use App\Models\Order;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -12,7 +11,9 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PanelController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReadingController;
 use App\Http\Controllers\DashboardController;
@@ -89,13 +90,22 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/checkout/stripe/create-intent', [CartController::class, 'createIntent'])->name('stripe.intent');
 
     // paymentsuccessfull
-    Route::get('/payment/success', function (Request $request) {
-        return view('cart.payment_success', [
-            'name' => $request->name,
-            'amount' => $request->amount,
-        ]);
+
+
+
+
+    // 
+
+
+    Route::get('/payment/success/{order}', function (Order $order) {
+        return view('cart.payment_success', compact('order'));
     })->name('payment.success');
 
+
+
+
+    // download order invoice
+    Route::get('/order/{order}/invoice', [OrderController::class, 'downloadInvoice'])->name('order.invoice');
 
 
     //faqcontroller

@@ -2,6 +2,29 @@
 
 @section('title', 'Home - Solar Panel Services')
 
+
+@section('styles')
+<style>
+    .team-card {
+        transition: 0.3s;
+        background-color: #fff;
+    }
+
+    .team-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .social-links a {
+        color: #555;
+        font-size: 18px;
+    }
+
+    .social-links a:hover {
+        color: #0d6efd;
+    }
+</style>
+@endsection
 @section('content') {{-- ✅ Use 'content' not 'userContent' --}}
 
 
@@ -61,79 +84,24 @@
         </div>
 
         <div class="row">
-            <!-- Team Member 1 -->
-            <div class="col-lg-3 col-md-6">
-                <div class="team-card">
-                    @foreach ($teams as $team )
-                    <div class="team-img">
-                        <img src="{{ asset('storage/' . $team->image) }}" class="card-img-top" alt="{{ $team->name }}">
+            @foreach ($teams as $team)
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="team-card shadow-sm rounded p-3 text-center">
+                    <div class="team-img mb-0">
+                        <img src="{{ asset('storage/' . $team->image) }}" class="img-fluid rounded-circle" alt="{{ $team->name }}" style="width: 250px; object-fit: cover;">
                     </div>
                     <div class="team-info">
-                        <h4 class="mb-0">{{ $team->name}}</h4>
-                        <p>{{ $team->designation}}</p>
-                        <div class="social-links">
+                        <h4 class="mb-1">{{ $team->name }}</h4>
+                        <p class="text-muted mb-2">{{ $team->designation }}</p>
+                        <div class="social-links d-flex justify-content-center gap-3">
                             <a href="#"><i class="fab fa-linkedin-in"></i></a>
                             <a href="#"><i class="fab fa-twitter"></i></a>
                             <a href="#"><i class="fab fa-facebook-f"></i></a>
                         </div>
                     </div>
-                    @endforeach
                 </div>
             </div>
-
-            <!-- Team Member 2 -->
-            <!-- <div class="col-lg-3 col-md-6">
-                <div class="team-card">
-                    <div class="team-img">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Taylah Toimle">
-                    </div>
-                    <div class="team-info">
-                        <h4>Taylah Toimle</h4>
-                        <p>Turbine Engineer</p>
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
-            <!-- Team Member 3 -->
-            <!-- <div class="col-lg-3 col-md-6">
-                <div class="team-card">
-                    <div class="team-img">
-                        <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Jasmine Parrott">
-                    </div>
-                    <div class="team-info">
-                        <h4>Jasmine Parrott</h4>
-                        <p>Design Expert</p>
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
-            <!-- Team Member 4 -->
-            <!-- <div class="col-lg-3 col-md-6">
-                <div class="team-card">
-                    <div class="team-img">
-                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Toby Sampson">
-                    </div>
-                    <div class="team-info">
-                        <h4>Toby Sampson</h4>
-                        <p>Solar Engineer</p>
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+            @endforeach
         </div>
     </div>
 </section>
