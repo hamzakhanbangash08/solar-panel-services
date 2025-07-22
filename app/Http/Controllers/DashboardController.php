@@ -41,11 +41,6 @@ class DashboardController extends Controller
 
 
             return view('admin.dashboard', compact('panels', 'users', 'readings', 'recentReadings', 'dates', 'energyValues', 'createpanel'));
-        } else {
-
-            // $panels = $user->panels()->with('readings')->get();
-            $panels = Panel::where('user_id', $user->id)->with('readings')->get();
-            return view('dashboard', compact('panels'));
         }
     }
 

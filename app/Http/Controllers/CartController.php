@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Stripe\Stripe;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Panel;
 use App\Models\OrderItem;
-use Illuminate\Http\Request;
-use Stripe\Stripe;
 use Stripe\PaymentIntent;
+use Illuminate\Http\Request;
+use App\Mail\OrderConfirmationMail;
+use Illuminate\Support\Facades\Mail;
 
 class CartController extends Controller
 {
@@ -205,14 +207,14 @@ class CartController extends Controller
             ]);
         }
 
+        // After order is created
+        Mail::to(auth()->user()->email)->send(new OrderConfirmationMail($order));
+
         Cart::where('user_id', auth()->id())->delete();
 
         return response()->json([
             'success' => true,
-            'redirect_url' => route('payment.success', [
-                'name' => auth()->user()->name,
-                'amount' => $total,
-            ])
+            'redirect_url' => route('payment.success', ['order' => $order->id])
         ]);
     }
 }

@@ -104,7 +104,7 @@
 @endsection
 @section('content')
 
-<div class="container">
+<div class="container mt-3 mt-md-5">
     <div class="row">
         <!-- Phone Card -->
         <div class="col-md-4">

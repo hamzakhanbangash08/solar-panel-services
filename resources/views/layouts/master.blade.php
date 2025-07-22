@@ -27,6 +27,9 @@
                     </div>
                 </div>
             </div>
+
+
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <!--end::App Content Header-->
 
             <!--begin::App Content-->
@@ -34,24 +37,18 @@
 
 
                 @yield('content')
+                @if(session('success'))
                 <script>
-                    const notyf = new Notyf({
-                        duration: 3000,
-                        position: {
-                            x: 'right',
-                            y: 'top'
-                        },
-                        dismissible: true,
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: '{{ session('
+                        success ') }}',
+                        timer: 3000,
+                        showConfirmButton: false
                     });
-
-                    @if(session('success'))
-                    notyf.success("{{ addslashes(session('success')) }}");
-                    @endif
-
-                    @if(session('error'))
-                    notyf.error("{{ addslashes(session('error')) }}");
-                    @endif
                 </script>
+                @endif
 
 
             </div>

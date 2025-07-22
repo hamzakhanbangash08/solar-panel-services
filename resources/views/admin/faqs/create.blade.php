@@ -57,26 +57,46 @@
                     answer: $('#answer').val()
                 },
                 success: function(response) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: isEdit ? 'Updated!' : 'Saved!',
+                        text: isEdit ? 'FAQ updated successfully.' : 'FAQ saved successfully.',
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+
+                    $('#faqForm')[0].reset();
+
+                    // Optional: Redirect if needed
                     if (response.redirect) {
-                        window.location.href = response.redirect;
-                    } else {
-                        $('#messageBox').html('<div class="alert alert-success">Saved successfully!</div>');
-                        $('#faqForm')[0].reset();
+                        setTimeout(function() {
+                            window.location.href = response.redirect;
+                        }, 2000);
                     }
                 },
-
                 error: function(xhr) {
-                    let errors = xhr.responseJSON.errors;
-                    let errorHtml = '<div class="alert alert-danger"><ul>';
-                    $.each(errors, function(key, value) {
-                        errorHtml += '<li>' + value + '</li>';
-                    });
-                    errorHtml += '</ul></div>';
-                    $('#messageBox').html(errorHtml);
+                    if (xhr.status === 422) {
+                        let errors = xhr.responseJSON.errors;
+                        let errorText = "";
+                        $.each(errors, function(key, value) {
+                            errorText += value + "\n";
+                        });
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Validation Error',
+                            text: errorText
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Something went wrong!'
+                        });
+                    }
                 }
             });
         });
     });
 </script>
-
 @endsection

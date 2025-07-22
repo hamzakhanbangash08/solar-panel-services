@@ -29,7 +29,8 @@ class PagesController extends Controller
 
     function aboutpage()
     {
-        return view('pages.about');
+        $panel = Panel::first();
+        return view('pages.about', compact('panel'));
     }
 
 
